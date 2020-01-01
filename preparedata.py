@@ -32,5 +32,5 @@ def save_response_content(response, destination):
 
 if __name__ == '__main__':
     file_id = '1HmCDihbtImuRYCNnDOBLGjEUHIHjLC2f'
-    destination = 'Faster-RCNN-TensorFlow-Python3/data/data.zip'
+    destination = './data/data.zip'
     download_file_from_google_drive(file_id, destination)
