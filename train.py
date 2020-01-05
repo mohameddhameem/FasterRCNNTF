@@ -70,8 +70,8 @@ class Train:
 
         self.data_layer = RoIDataLayer(self.roidb, self.imdb.num_classes)
         self.output_dir = cfg.get_output_dir(self.imdb, 'default')
-        self.tbdir = 'GIVE REQUIRED PATH HERE'
-        self.tbvaldir = 'GIVE REQUIRED PATH HERE'
+        self.tbdir = '/Users/mohameddhameemm/PycharmProjects/FasterRCNNTF/TrainDir'
+        self.tbvaldir = '/Users/mohameddhameemm/PycharmProjects/FasterRCNNTF/ValDir'
 
 
     def train(self):
@@ -111,8 +111,8 @@ class Train:
             # We will handle the snapshots ourselves
             self.saver = tf.train.Saver(max_to_keep=100000)
             # Write the train and validation information to tensorboard
-            # writer = tf.summary.FileWriter(self.tbdir, sess.graph)
-            # valwriter = tf.summary.FileWriter(self.tbvaldir)
+            writer = tf.summary.FileWriter(self.tbdir, sess.graph)
+            valwriter = tf.summary.FileWriter(self.tbvaldir)
 
         # Load weights
         # Fresh train directly from ImageNet weights
@@ -142,7 +142,7 @@ class Train:
             # Learning rate
             if iter == cfg.FLAGS.step_size + 1:
                 # Add snapshot here before reducing the learning rate
-                # self.snapshot(sess, iter)
+                self.snapshot(sess, iter)
                 sess.run(tf.assign(lr, cfg.FLAGS.learning_rate * cfg.FLAGS.gamma))
 
             timer.tic()
